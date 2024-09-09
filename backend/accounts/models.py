@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class AccountManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
@@ -18,16 +18,18 @@ class AccountManager(BaseUserManager):
         return self.create_user(username, password, **extra_fields)
     
 
-class Account(AbstractUser):
+class Account(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     address = models.TextField(null=True, blank=True)
     note = models.TextField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     objects = AccountManager()
 
     USERNAME_FIELD = 'username'

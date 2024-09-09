@@ -3,17 +3,21 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views import (
-    ClientModelViewSet, CekModelViewSet, TolegModelViewSet,
-    CategoryModelViewSet, HarytModelViewSet
+    ClientModelViewSet, SupplierModelViewSet, CekModelViewSet, PaymentModelViewSet,
+    CategoryModelViewSet, ProductModelViewSet, 
+    ExpenseTypeModelViewSet, ExpenseModelViewSet, 
 )
 
 
 router = DefaultRouter()
-router.register('clients', ClientModelViewSet)
-router.register('ceks', CekModelViewSet)
-router.register('tolegs', TolegModelViewSet)
-router.register('categories', CategoryModelViewSet)
-router.register('haryts', HarytModelViewSet)
+router.register(r'clients', ClientModelViewSet)
+router.register(r'suppliers', SupplierModelViewSet)
+router.register(r'ceks', CekModelViewSet)
+router.register(r'payments', PaymentModelViewSet)
+router.register(r'categories', CategoryModelViewSet)
+router.register(r'products', ProductModelViewSet)
+router.register(r'expensetypes', ExpenseTypeModelViewSet)
+router.register(r'expenses', ExpenseModelViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

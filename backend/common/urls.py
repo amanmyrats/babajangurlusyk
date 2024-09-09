@@ -6,8 +6,8 @@ from .views import CurrencyModelViewSet, UnitModelViewSet
 
 
 router = DefaultRouter()
-router.register('currencies', CurrencyModelViewSet)
-router.register('units', UnitModelViewSet)
+router.register(r'currencies', CurrencyModelViewSet)
+router.register(r'units', UnitModelViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

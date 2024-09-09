@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     'authentication',
 
+    'v1',
     'common',
     'company',
     'accounts',
