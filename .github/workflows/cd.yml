@@ -1,0 +1,20 @@
+name: Deploy BabajanGurlusyk to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST_IP }}
+          username: ${{ secrets.EC2_USERNAME }}
+          password: ${{ secrets.PWD }}
+          key: ${{ secrets.SSH_PEM_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: cd /home/ubuntu/babajangurlusyk && ./deploy_script.sh ${{ secrets.GH_USERNAME }} ${{ secrets.GH_PAT }} ${{ secrets.GH_MAIN_BRANCH }}
