@@ -1,0 +1,82 @@
+<p-panel>
+    <form [formGroup]="expenseForm" class="generic-form" (ngSubmit)="submitForm()">
+        <div class="p-grid p-fluid">
+            <input id="id" type="text" formControlName="id" hidden>
+            <div class="p-col-12">
+                <span class="p-float-label">
+                    
+                    <p-dropdown 
+                        [options]="expenseTypes"
+                        formControlName="expense_type"
+                        optionLabel="name"
+                        optionValue="id"
+                        [filter]="true"
+                        id="expense_type"
+                        filterBy="name" 
+                        [showClear]="true"
+                        placeholder="Çykdajy Görnüşi Saýlaň"
+                        appendTo="body">
+                            <ng-template let-expense_type pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ expense_type.name }}</div>
+                                </div>
+                            </ng-template>
+                    </p-dropdown>
+
+                    <label for="expense_type">Çykdajy Görnüşi</label>
+                </span>
+            </div>
+            <div class="p-col-12">
+                <span class="p-float-label">
+                    <textarea 
+                        rows="5"
+                        cols="30" 
+                        id="description"
+                        pInputTextarea 
+                        formControlName="description" >
+                    </textarea>
+                    <label for="description">Doly Düşündirilişi</label>
+                </span>
+            </div>
+            <div class="p-col-12">
+                <span class="p-float-label">
+                    <p-inputNumber 
+                        formControlName="amount"
+                        inputId="minmaxfraction" 
+                        mode="decimal" 
+                        id="amount"
+                        [minFractionDigits]="2" 
+                        [maxFractionDigits]="2"  /> 
+                    <label for="number-input">Möçberi</label>
+                </span>
+            </div>
+            <div class="p-col-12">
+                <span class="p-float-label">
+                    <p-dropdown 
+                        [options]="currencies"
+                        formControlName="currency"
+                        optionLabel="code"
+                        optionValue="id"
+                        [filter]="true"
+                        id="currency"
+                        filterBy="code" 
+                        [showClear]="true"
+                        placeholder="Para birimi seçiniz"
+                        appendTo="body">
+                            <ng-template let-currency pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ currency.code }}</div>
+                                </div>
+                            </ng-template>
+                    </p-dropdown>
+
+                    <label for="currency">Pul Birligi</label>
+                </span>
+            </div>
+            <div class="p-col-6">
+                <button type="submit" pButton label="Yatda Sakla" class="p-button-success"></button>
+            </div>
+        </div>
+    </form>
+    <p-messages></p-messages>
+</p-panel>

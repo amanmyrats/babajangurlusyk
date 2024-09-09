@@ -1,0 +1,32 @@
+<!-- <div class="profile-form-wrapper"> -->
+
+<p-panel>
+    <form [formGroup]="profileForm" class="user-form" (ngSubmit)="submitForm()">
+      <div class="p-grid p-fluid">
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="firstName" type="text" formControlName="first_name" pInputText>
+            <label for="firstName">Ady</label>
+          </span>
+        </div>
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="lastName" type="text" formControlName="last_name" pInputText>
+            <label for="lastName">Familiýasy</label>
+          </span>
+        </div>
+        <!-- show form validation errors here -->
+        <div class="p-col-12" style="margin-top: 10px;">
+          <span *ngIf="profileForm.get('first_name')?.errors?.['required'] && profileForm.get('first_name')?.touched" class="p-error">
+            Ady hökman gerek!
+          </span>
+        </div>
+        <div class="p-col-6">
+          <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
+        </div>
+      </div>
+    </form>
+    <p-messages></p-messages>
+  </p-panel>
+<!-- </div> -->
+  

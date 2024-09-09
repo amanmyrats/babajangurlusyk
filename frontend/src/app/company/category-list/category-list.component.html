@@ -1,0 +1,47 @@
+<app-filter-search 
+    [first]="first"
+    [rows]="rows"
+    (searchEmitter)="search($event)"
+    >
+</app-filter-search>
+
+<app-shared-toolbar 
+[createRole]="'orunbasar'"
+    (createEmitter)="createObj()" 
+    (searchEmitter)="search()">
+</app-shared-toolbar>
+
+<p-table [value]="categories" styleClass="p-datatable-striped p-datatable-gridlines"
+    [rowHover]="true" [loading]="loading" [resizableColumns]="true" columnResizeMode="expand"
+    [tableStyle]="{'min-width': '70rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Kategoriýa</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-category>
+        <tr>
+            <td>{{category.name}}</td>
+            <td class="action-column">
+                <app-action-buttons 
+                    [obj]="category" 
+                    [wantEdit]="true"
+                    [wantDelete]="true"
+                    (updateEmitter)="updateObj($event)" 
+                    (deleteEmitter)="deleteObj($event)">
+                </app-action-buttons>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+    
+<app-shared-paginator 
+    [first]="first" 
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    (onPageChangeEmitter)="onPageChange($event)">
+</app-shared-paginator>
+
+<p-toast position="bottom-right" [life]="10000"/>
+<p-confirmDialog />

@@ -1,0 +1,64 @@
+<app-filter-search 
+    [clients]="clients"
+    [suppliers]="suppliers"
+    [paymentTypes]="paymentTypes"
+    [wantClientFilter]="true"
+    [wantSupplierFilter]="true"
+    [wantPaymentTypeFilter]="true"
+    (searchEmitter)="search($event)"
+    >
+</app-filter-search>
+
+<app-shared-toolbar 
+    (createEmitter)="createObj()" 
+    (searchEmitter)="search()">
+</app-shared-toolbar>
+
+<p-table [value]="payments" styleClass="p-datatable-striped p-datatable-gridlines"
+    [rowHover]="true" [loading]="loading" [resizableColumns]="true" columnResizeMode="expand"
+    [tableStyle]="{'min-width': '70rem'}">
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Müşderi</th>
+            <th>Telekeçi</th>
+            <th>Gelen / Giden</th>
+            <th>Möçber</th>
+            <th>Senesi</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-payment>
+        <tr>
+            <td>{{payment.client_obj?.first_name}} {{payment.client_obj?.last_name}}</td>
+            <td>{{payment.supplier_obj?.first_name}} {{payment.supplier_obj?.last_name}}</td>
+            <td>
+                <span *ngIf="payment.payment_type == 'IN'">Gelen Töleg</span>
+                <span *ngIf="payment.payment_type == 'OUT' ">Giden Töleg</span>
+            </td>
+            <td>
+                {{payment.amount | number:'1.2-2' }} TMT
+            </td>
+            <td>{{payment.date}}</td>
+            <td class="action-column">
+                <app-action-buttons 
+                    [obj]="payment" 
+                    [wantEdit]="true"
+                    [wantDelete]="true"
+                    (updateEmitter)="updateObj($event)" 
+                    (deleteEmitter)="deleteObj($event)">
+                </app-action-buttons>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<app-shared-paginator #paginator 
+    [first]="first" 
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    (onPageChangeEmitter)="onPageChange($event)">
+</app-shared-paginator>
+
+<p-toast position="bottom-right" [life]="10000"/>
+<p-confirmDialog />

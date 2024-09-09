@@ -1,0 +1,21 @@
+<p-panel>
+        <div class="p-grid p-fluid">
+            <div class="p-col-12">
+                <p-toast />
+                <p-fileUpload 
+                    chooseLabel="Excel Saýlaň" 
+                    chooseIcon="pi pi-upload"
+                    accept=".xlsx" 
+                    maxFileSize="1000000" 
+                    [showUploadButton]="true"
+                    [showCancelButton]="true"
+                    uploadLabel="Ýükle"
+                    cancelLabel="Arassala"
+                    chooseIcon="pi pi-file"
+                    [customUpload]="true"
+                    (uploadHandler)="uploadExcel($event)"
+                    />
+            </div>
+        </div>
+    <p-messages></p-messages>
+</p-panel>

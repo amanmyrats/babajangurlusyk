@@ -1,0 +1,71 @@
+<app-filter-search 
+    [first]="first"
+    [rows]="rows"
+    (searchEmitter)="search($event)"
+    >
+</app-filter-search>
+
+<app-shared-toolbar 
+[createRole]="'orunbasar'"
+    (createEmitter)="createObj()" 
+    (searchEmitter)="search()">
+</app-shared-toolbar>
+
+
+<p-table [columns]="selectedColumns" [value]="suppliers" styleClass="p-datatable-striped p-datatable-gridlines"
+    [rowHover]="true" [loading]="loading" [resizableColumns]="true" columnResizeMode="expand"
+    [tableStyle]="{'min-width': '70rem'}">
+    <ng-template pTemplate="caption">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="font-size: xx-large;">Telekeçiler</div>
+            <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                selectedItemsLabel="{0} sütün saýlandy" placeholder="Sütün saýlaň" />
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th>Telekeçi</th>
+            <th pResizableColumn *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th>Olaryň bergisi</th>
+            <th>Biziň bergimiz</th>
+            <th>Tapawudy</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-supplier let-columns="columns">
+        <tr>
+            <td>{{supplier.first_name}}</td>
+            <td *ngFor="let col of columns">
+                {{supplier[col.field]}}
+            </td>
+            <td>{{supplier.olaryn_bergisi | number:'1.2-2' }}</td>
+            <td>{{supplier.bizin_bergimiz | number:'1.2-2' }}</td>
+            <td>{{(supplier.olaryn_bergisi - supplier.bizin_bergimiz) | number:'1.2-2' }}</td>
+            
+            <td class="action-column">
+                <app-action-buttons 
+                    [obj]="supplier" 
+                    [wantEdit]="true"
+                    [wantDelete]="true"
+                    (updateEmitter)="updateObj($event)" 
+                    (deleteEmitter)="deleteObj($event)">
+                </app-action-buttons>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+    
+<app-shared-paginator 
+    [first]="first" 
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    (onPageChangeEmitter)="onPageChange($event)">
+</app-shared-paginator>
+
+
+<p-toast position="bottom-right" [life]="10000"/>
+<p-confirmDialog />

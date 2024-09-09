@@ -1,0 +1,7 @@
+
+<p-button *ngIf="wantEdit && hasPermission(editRole)" icon="pi pi-pencil" [rounded]="true" 
+[outlined]="true"
+(click)="onUpdate()" />
+
+<p-button *ngIf="wantDelete && hasPermission(deleteRole)" icon="pi pi-times" severity="danger" 
+(click)="onDelete()" />

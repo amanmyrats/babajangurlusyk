@@ -1,0 +1,17 @@
+<p-panel>
+    <form [formGroup]="categoryForm" class="generic-form" (ngSubmit)="submitForm()">
+      <div class="p-grid p-fluid">
+          <input id="id" type="text" formControlName="id" hidden>
+          <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="name" type="text" formControlName="name" pInputText>
+            <label for="name">Ady</label>
+          </span>
+        </div>
+        <div class="p-col-6">
+          <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
+        </div>
+      </div>
+    </form>
+    <p-messages></p-messages>
+  </p-panel>

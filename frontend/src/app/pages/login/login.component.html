@@ -1,0 +1,31 @@
+<div class="login-page">
+  <div class="login-container">
+    <h1>Giriş Yap</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="p-fluid">
+        <div class="p-field">
+          <label for="username">Ulanyjy Ady</label>
+          <input id="username" type="text" pInputText formControlName="username" />
+        </div>
+        <div class="p-field">
+          <label for="password">Parol</label>
+          <input id="password" type="password" pInputText formControlName="password" />
+        </div>
+        <button 
+          [loading]="loading" 
+          pButton type="submit" 
+          label="Sistema Gir" 
+          class="p-button-raised p-button-primary"></button>
+      </div>
+    </form>
+      <div class="links">
+        <button pButton 
+          label="Agza däl bolsaňyz registrasiýa boluň!" 
+          class="p-button-link" (click)="onRegister()"></button>
+        <button pButton type="button" label="Esasy Sahypa Git" class="p-button-link" (click)="onBackToMain()"></button>
+        <!-- <button pButton type="button" label="Şifremi unuttum" class="p-button-link" (click)="onGoToPasswordReset()"></button> -->
+          <p-messages [(value)]="messages"  [enableService]="false" ></p-messages>
+      </div>
+    </div>
+  </div>
+  

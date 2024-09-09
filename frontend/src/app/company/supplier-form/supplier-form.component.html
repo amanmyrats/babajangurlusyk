@@ -1,0 +1,70 @@
+<p-panel>
+    <form [formGroup]="supplierForm" class="generic-form" (ngSubmit)="submitForm()">
+      <div class="p-grid p-fluid">
+        <input id="id" type="text" formControlName="id" hidden>
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="first_name" type="text" formControlName="first_name" pInputText>
+            <label for="first_name">Ady</label>
+          </span>
+        </div>
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="last_name" type="text" formControlName="last_name" pInputText>
+            <label for="last_name">Familiýasy</label>
+          </span>
+        </div>
+        
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="yetkili" type="text" formControlName="phone" pInputText>
+            <label for="phone">Telefon</label>
+          </span>
+        </div>
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="yetkili" type="text" formControlName="phone_2" pInputText>
+            <label for="phone_2">Telefon-2</label>
+          </span>
+        </div>
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="yetkili" type="text" formControlName="phone_3" pInputText>
+            <label for="phone_3">Telefon-3</label>
+          </span>
+        </div>
+  
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="address" type="text" formControlName="address" pInputText>
+            <label for="address">Adres</label>
+          </span>
+        </div>
+  
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="email" type="email" formControlName="email" pInputText>
+            <label for="email">E-Poçta</label>
+          </span>
+        </div>
+        
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <textarea 
+              rows="5"
+              cols="30" 
+              pInputTextarea 
+              formControlName="note">
+          </textarea>
+            <label for="note">Bellik</label>
+          </span>
+        </div>
+  
+        <div class="p-col-6">
+          <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
+        </div>
+      </div>
+    </form>
+    <p-messages></p-messages>
+  </p-panel>
+  

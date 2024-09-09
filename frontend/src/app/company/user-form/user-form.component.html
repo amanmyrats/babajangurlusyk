@@ -1,0 +1,36 @@
+<p-panel>
+    <form [formGroup]="userForm" class="generic-form" (ngSubmit)="submitForm()">
+      <div class="p-grid p-fluid">
+
+        <div class="p-col-12">
+          <span class="p-float-label">
+            <input id="first_name" type="text" formControlName="first_name" pInputText>
+            <label for="first_name">Ady</label>
+          </span>
+        </div>
+        <div class="p-col-12">
+            <span class="p-float-label">
+              <input id="last_name" type="text" formControlName="last_name" pInputText>
+              <label for="last_name">Familiýasy</label>
+            </span>
+          </div>
+
+        <div class="p-col-12" style="margin-top: 2rem;">
+              <p-dropdown 
+              [options]="roles"
+              formControlName="role" 
+              optionLabel="role_name" 
+              optionValue="id"
+              placeholder="Rugsat derejesini saýlaň" 
+              appendTo="body" 
+              id="role"/>
+            </div>
+
+
+          <div class="p-col-6">
+            <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
+          </div>
+      </div>
+    </form>
+    <p-messages></p-messages>
+  </p-panel>

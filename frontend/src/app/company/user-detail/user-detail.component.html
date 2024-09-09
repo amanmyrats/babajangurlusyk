@@ -1,0 +1,31 @@
+<div class="profile-wrapper">
+
+<p-panel header="User Profile">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-4">
+        <div class="profile-picture">
+          <img src="assets/images/logo_resized.png" alt="Profile Picture">
+        </div>
+      </div>
+      <div class="p-col-12 p-md-8">
+        <div class="profile-details">
+          <p>
+            <strong>Ady:</strong> {{ user.first_name }}
+          </p>
+          <p>
+            <strong>Familiýasy:</strong> {{ user.last_name }}
+          </p>
+          <p>
+            <strong>Ulanyjy Ady:</strong> {{ user.username }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-col-6" style="margin-left: 20%;">
+      <p-button (click)="showProfileForm()" icon="pi pi-pencil" label="Bilgileri değiştir"  [outlined]="true" severity="contrast"></p-button>
+    </div>
+    
+  </p-panel>
+</div>
+  

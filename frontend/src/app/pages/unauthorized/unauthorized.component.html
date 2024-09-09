@@ -1,0 +1,12 @@
+<!-- unauthorized.component.html -->
+<div class="unauthorized-container">
+    <div class="unauthorized-content">
+      <h1>Rugsatsyz Giriş</h1>
+      <p>Bu sahypany görmek üçin gerekli rugsadyňyz ýok.</p>
+      <p>Eger-de, bul-a beýle bolmaly däl diýip pikir edýän bolaňyz, başlygyňyz bilen habarlaşyň.</p>
+      <div class="links">
+        <a routerLink="/company" *ngIf="isLoggedIn" class="btn btn-primary">Dükanyň Esasy Sahypasyna Git</a>
+        <a routerLink="/login" *ngIf="!isLoggedIn" class="btn btn-secondary">Sistema Gir</a>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,112 @@
+<p-panel>
+    <form [formGroup]="paymentForm" class="generic-form" (ngSubmit)="submitForm()">
+        <div class="p-grid p-fluid">
+            <input id="id" type="text" formControlName="id" hidden>
+            <div class="horizontal-row">
+                <div class="p-col-12 horizontal-row-child">
+                    <p-floatLabel>
+                        <p-dropdown [options]="paymentTypes" formControlName="payment_type" 
+                            optionLabel="label" optionValue="value" appendTo="body">
+                            <ng-template let-paymentType pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ paymentType.label }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <label for="reservationDate">Gelen/Giden?</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+            
+            <div class="horizontal-row">
+
+                <div class="p-col-12 horizontal-row-child">
+                    <p-floatLabel>
+                        <p-dropdown [options]="partnerTypes" formControlName="partner_type" optionLabel="label"
+                            optionValue="value" appendTo="body">
+                            <ng-template let-partnerType pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ partnerType.label }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <label for="reservationDate">Müşderi/Telekeçi?</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+            <div class="horizontal-row">
+
+                <div class="p-col-12 horizontal-row-child" 
+                    *ngIf="paymentForm.get('partner_type')?.value == 'CLIENT'">
+                    <p-floatLabel>
+                        <p-dropdown [options]="clients" formControlName="client" optionLabel="name" optionValue="id"
+                            [filter]="true" filterBy="first_name" [showClear]="true" appendTo="body">
+                            <ng-template let-client pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ client.first_name }} {{ client.last_name }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <label for="client">Müşderi</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+            <div class="horizontal-row">
+
+                <div class="p-col-12 horizontal-row-child"
+                *ngIf="paymentForm.get('partner_type')?.value == 'SUPPLIER'">
+                    <p-floatLabel>
+                        <p-dropdown [options]="suppliers" formControlName="supplier" optionLabel="name" optionValue="id"
+                            [filter]="true" filterBy="first_name" [showClear]="true" appendTo="body">
+                            <ng-template let-supplier pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ supplier.first_name }} {{ supplier.first_name }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <label for="supplier">Telekeçi</label>
+                    </p-floatLabel>
+                </div>
+            </div>
+            <div class="acente-row horizontal-row amount-currency">
+                <div class="horizontal-row-child">
+                    <p-floatLabel>
+                        <p-inputNumber formControlName="amount" inputId="minmaxfraction" 
+                        mode="decimal"
+                        [minFractionDigits]="0" [maxFractionDigits]="2" />
+                        <label for="number-input">Amount</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="p-col-12">
+                    <span class="p-float-label">
+                      <textarea 
+                        rows="5"
+                        cols="30" 
+                        pInputTextarea 
+                        formControlName="note">
+                    </textarea>
+                      <label for="note">Bellik</label>
+                    </span>
+                  </div>
+                </div>
+
+            <div class="horizontal-row">
+                <div class="p-col-12 horizontal-row-child">
+                    <p-floatLabel>
+                        <p-calendar formControlName="payment_date" [showIcon]="true" inputId="icondisplay"
+                            dateFormat="yy-mm-dd" dataType="string" />
+                        <label for="payment_date">Reservation Date</label>
+                    </p-floatLabel>
+                </div>
+
+            </div>
+            <div class="horizontal-row">
+                <div class="p-col-6">
+                    <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-messages></p-messages>
+</p-panel>

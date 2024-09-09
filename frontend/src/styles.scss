@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+@import './assets/styles/primeng-table-styles.scss';
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+// p-dialog global starts
+.fit-content-dialog .p-dialog {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .fit-content-dialog .p-dialog-content {
+    flex-grow: 1;
+    overflow: auto;
+  }
+  
+  .fit-content-dialog .p-dialog {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: auto !important; /* Ensure the dialog grows as needed */
+    height: auto !important; /* Ensure the dialog grows as needed */
+  }
+// p-dialog global ends

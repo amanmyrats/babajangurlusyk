@@ -1,0 +1,53 @@
+<app-filter-search 
+    [expenseTypes]="expenseTypes" 
+    [wantExpenseTypeFilter]="true"
+    [first]="first"
+    [rows]="rows"
+    (searchEmitter)="search($event)"
+    >
+</app-filter-search>
+
+<app-shared-toolbar 
+[createRole]="'orunbasar'"
+    (createEmitter)="createObj()" 
+    (searchEmitter)="search()">
+</app-shared-toolbar>
+
+<p-table [value]="expenses" styleClass="p-datatable-striped p-datatable-gridlines"
+    [rowHover]="true" [loading]="loading" [resizableColumns]="true" columnResizeMode="expand"
+    [tableStyle]="{'min-width': '70rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Çykdajy Görnüşi</th>
+            <th>Doly Düşündirilişi</th>
+            <th>Möçberi</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-expense>
+        <tr>
+            <td>{{expense.expense_type_obj?.name}}</td>
+            <td>{{expense.description}}</td>
+            <td>{{expense.amount | number: '1.2-2' }} {{expense.currency_obj?.code}}</td>
+            <td class="action-column">
+                <app-action-buttons 
+                    [obj]="expense" 
+                    [wantEdit]="true"
+                    [wantDelete]="true"
+                    (updateEmitter)="updateObj($event)" 
+                    (deleteEmitter)="deleteObj($event)">
+                </app-action-buttons>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<app-shared-paginator 
+    [first]="first" 
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    (onPageChangeEmitter)="onPageChange($event)">
+</app-shared-paginator>
+
+<p-toast position="bottom-right" [life]="10000"/>
+<p-confirmDialog />

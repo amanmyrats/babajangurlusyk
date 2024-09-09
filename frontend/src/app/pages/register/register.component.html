@@ -1,0 +1,35 @@
+<div class="register-page">
+    <div class="register-container">
+      <h1>Kayıt Ol</h1>
+      <form [formGroup]="employeeForm" (ngSubmit)="onRegister()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="username">Ulanyjy Ady *</label>
+          <input id="username" type="text" pInputText formControlName="username" />
+        </div>
+
+        <div class="p-field">
+          <label for="first_name">Ady *</label>
+          <input id="first_name" type="text" pInputText formControlName="first_name" />
+        </div>
+
+        <div class="p-field">
+          <label for="last_name">Familiýasy *</label>
+          <input id="last_name" type="text" pInputText formControlName="last_name" />
+        </div>
+        <div class="p-field">
+          <label for="phone">Telefon *</label>
+          <input id="phone" type="text" pInputText formControlName="phone" />
+        </div>
+        
+        <button pButton [loading]="loading" type="submit" label="Kayıt Ol" class="p-button-raised p-button-primary"></button>
+      </div>
+    </form>
+      <div class="links">
+        <button pButton type="button" label="Eger agza bolaňyz sistema giriň!" class="p-button-link" (click)="onGotoLogin()"></button>
+        <button pButton type="button" label="Esasy sahypa git." class="p-button-link" (click)="onBackToMain()"></button>
+      </div>
+      <p-messages></p-messages>
+    </div>
+  </div>
+  

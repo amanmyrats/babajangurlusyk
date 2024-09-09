@@ -1,0 +1,36 @@
+<ng-template #rugsatsyz>
+  <div class="content-container">
+    <div class="content-message">
+      <p>Bu ýerini görmäge rugsadyňyz ýok.</p>
+      <p>Görkezijileri görmek üçin başlyk bilen habarlaşyň.</p>
+    </div>
+  </div>
+</ng-template>
+
+<div class="grid" *ngIf="hasPermission('orunbasar'); else rugsatsyz">
+    <div class="col-4">
+      <p-card [style]="{textAlign: 'center'}">
+        <h3>{{ dashboardData?.jemiMusderi }}</h3>
+        <p>Jemi müşderi</p>
+      </p-card>
+    </div>
+    <div class="col-4">
+      <p-card [style]="{textAlign: 'center'}">
+        <h3>{{ dashboardData?.jemiUssa }}</h3>
+        <p>Jemi ussa</p>
+      </p-card>
+    </div>
+    <div class="col-4">
+      <p-card [style]="{textAlign: 'center'}">
+        <h3>{{ dashboardData?.jemiHaryt }}</h3>
+        <p>Jemi haryt</p>
+      </p-card>
+    </div>
+    <div class="col-4">
+      <p-card [style]="{textAlign: 'center'}">
+        <h3>{{ dashboardData?.jemiSatys }}</h3>
+        <p>Jemi Satyş</p>
+      </p-card>
+    </div>
+  </div>
+  

@@ -1,0 +1,24 @@
+/* PrimeNG table styles */
+.p-table {
+    width: 100%;
+    table-layout: auto; /* Allow the table to adjust based on its content */
+  }
+  
+  /* Action column should take minimum width */
+  .action-column {
+    width: 1%;
+    white-space: nowrap; /* Prevent wrapping to ensure it fits its content */
+  }
+  
+  /* Note column should take remaining available space */
+  .note-column {
+    width: auto; /* Take remaining space */
+    min-width: 150px; /* Optional, set a minimum width */
+  }
+  
+  /* Ensure other columns do not expand unnecessarily */
+  th, td {
+    // overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

@@ -1,0 +1,60 @@
+<form [formGroup]="filterSearchForm" (ngSubmit)="onSubmit()">
+    <!-- <div class="p-grid"> -->
+    <div class="p-d-flex p-justify-content-center p-align-items-center">
+        <!-- <p-calendar formControlName="date" 
+            placeholder="Transfer tarihi" dateFormat="yy-mm-dd"></p-calendar> -->
+
+        <!-- nice calendar picker here -->
+
+
+        <div class="p-col-12 p-md-3" style="display: flex; justify-content: center;align-items: center;">
+            
+            <span *ngIf="wantDateFilter">
+                <button class="next-prev-button" (click)="prevDay()">
+                    <i class="pi pi-chevron-left"></i>
+                </button>
+                <p-calendar formControlName="date" inputId="buttondisplay" placeholder="Transfer tarihi"
+                    [showButtonBar]="true" dateFormat="yy-mm-dd" showClear="true" (onSelect)="onFilterChage()"
+                    (onClear)="onFilterChage()" [inputStyle]="{'width': '170px'}" variant="filled">
+                </p-calendar>
+                <button class="next-prev-button" (click)="nextDay()">
+                    <i class="pi pi-chevron-right"></i>
+                </button>
+            </span>
+
+        </div>
+
+
+        <div class="p-col-12 p-md-3" style="display: flex; justify-content: center;align-items: center;">
+
+            <p-dropdown *ngIf="wantClientFilter" [options]="clients" formControlName="client" optionLabel="first_name" optionValue="id"
+                placeholder="Müşderi saýlaň" (onChange)="onFilterChage()" showClear="true" appendTo="body" />
+            <!-- </div> -->
+            <!-- <div class="p-col-12 p-md-3"> -->
+            <p-dropdown *ngIf="wantSupplierFilter" [options]="suppliers" formControlName="supplier" optionLabel="first_name" optionValue="id"
+                placeholder="Telekeçi saýlaň" (onChange)="onFilterChage()" showClear="true" appendTo="body" />
+            <!-- </div> -->
+             <p-dropdown *ngIf="wantRoleFilter" [options]="roles" formControlName="role" optionLabel="role_name" optionValue="id"
+                placeholder="Wezipe saýlaň" (onChange)="onFilterChage()" showClear="true" appendTo="body" />
+            
+            <p-dropdown *ngIf="wantExpenseTypeFilter" [options]="expenseTypes" formControlName="expense_type" optionLabel="name" optionValue="id"
+                placeholder="Çykdajy görnüşi saýlaň" (onChange)="onFilterChage()" showClear="true" appendTo="body" />
+            
+            <p-dropdown *ngIf="wantCategoryFilter" [options]="categories" formControlName="category" optionLabel="name" optionValue="id"
+                placeholder="Kategoriýa saýlaň" (onChange)="onFilterChage()" showClear="true" appendTo="body" />
+        
+            <!-- <div class="p-col-12 p-md-3"> -->
+            <span *ngIf="wantSearchFilter" class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText placeholder="Search" formControlName="search" />
+            </span>
+            <button pButton type="submit" label="Search" icon="pi pi-search"
+                class="p-button-raised p-button-rounded p-button-success">
+            </button>
+            <!-- add clear search icon with flask and search icon -->
+            <button pButton type="button" label="Clear" icon="pi pi-times"
+                class="p-button-raised p-button-rounded p-button-danger" (click)="clearSearch()">
+            </button>
+        </div>
+    </div>
+</form>

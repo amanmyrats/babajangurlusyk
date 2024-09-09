@@ -1,0 +1,94 @@
+<app-filter-search 
+    [wantCategoryFilter]="true"
+    [first]="first"
+    [rows]="rows"
+    (searchEmitter)="search($event)"
+    (getCategoryEmitter)="getCategories()"
+    >
+</app-filter-search>
+<app-shared-toolbar 
+    [createRole]="'orunbasar'"
+    (createEmitter)="createObj()" 
+    (exportEmitter)="export()"
+    (importEmitter)="import()"
+    (searchEmitter)="search()">
+</app-shared-toolbar>
+
+<p-table [columns]="selectedColumns" [value]="products" styleClass="p-datatable-striped p-datatable-gridlines"
+    [rowHover]="true" [loading]="loading" [resizableColumns]="true" columnResizeMode="expand"
+    [tableStyle]="{'min-width': '70rem'}">
+    <ng-template pTemplate="caption">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="font-size: xx-large;">HARYTLAR</div>
+            <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                selectedItemsLabel="{0} sütün saýlandy" placeholder="Sütün saýlaň" />
+        </div>
+    </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th>Ady</th>
+                <th pResizableColumn *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-columns="columns">
+            <tr *ngIf="loading">
+
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+                <td><p-skeleton /></td>
+            </tr>
+            <tr>
+                <td>{{product.name}}</td>
+
+            <td *ngFor="let col of columns">
+                <span *ngIf="col.field === 'unit'">
+                    {{product.unit_obj?.code}}
+                </span>
+
+                <span *ngIf="col.field === 'initial_price'">
+                    {{product.initial_price | number:'1.2-2' }} {{product.initial_price_currency_obj?.code}}
+                </span>
+                <span *ngIf="col.field === 'sale_price'">
+                    {{product.sale_price | number:'1.2-2' }} {{product.sale_price_currency_obj?.code}}
+                </span>
+                <span *ngIf="col.field === 'category'">
+                    {{product.category_obj?.name}}
+                </span>
+                <span *ngIf="col.field === 'name_2'
+                || col.field === 'name_3'
+                || col.field === 'description'
+                ">
+                    {{ product[col.field] }}
+                </span>
+                
+            </td>
+
+                <td class="action-column">
+                    <app-action-buttons 
+                        [obj]="product" 
+                        [editRole]="'orunbasar'"
+                        [deleteRole]="'orunbasar'"
+                        [wantEdit]="true"
+                        [wantDelete]="true" 
+                        (updateEmitter)="updateObj($event)" 
+                        (deleteEmitter)="deleteObj($event)">
+                    </app-action-buttons>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+<app-shared-paginator 
+    [first]="first" 
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    (onPageChangeEmitter)="onPageChange($event)">
+</app-shared-paginator>
+
+<p-toast position="bottom-right" [life]="10000"/>
+<p-confirmDialog />

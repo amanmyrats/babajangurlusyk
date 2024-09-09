@@ -1,0 +1,25 @@
+.grid {
+    display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  p-card {
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .content-container {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .content-message {
+    font-size: 18px;
+    color: #555;
+  }
+  

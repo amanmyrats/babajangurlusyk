@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh; /* Set minimum height to viewport height */
+    flex-direction: column; /* Stack divs vertically */
+  }
+  
+  .content
+   {
+    flex: 1; /* Make all divs take up equal space */
+    padding: 1rem; /* Add some padding */
+  }
+  
+  .navbar {
+    background-color: #f0f0f0; /* Example background color */
+  }
+  
+//   .content {
+//     overflow-y: auto; /* Enable scrolling if content overflows */
+//   }
+  
+  .footer {
+    min-height: 2rem;
+    background-color: #e0e0e0; /* Example background color */
+  }
+  
