@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - cd frontend
+      - npm install
+  build:
+    commands:
+      # - cd frontend
+      - npm run build --prod
+  post_build:
+    commands:
+      # - cd frontend
+      # - aws s3 sync ./dist/babajangurlusyk/browser s3://babajangurlusyk.com --delete
+      # - aws cloudfront create-invalidation --distribution-id E1MJNHUS0SC6E9 --paths "/*"
+      
+      # Sync HTML with short cache duration
+      - aws s3 cp ./dist/babajangurlusyk/browser/index.html s3://babajangurlusyk.com/index.html --cache-control "max-age=0,no-cache,no-store,must-revalidate"
+
+      # Sync other files with longer cache duration
+      - aws s3 sync ./dist/babajangurlusyk/browser s3://babajangurlusyk.com --exclude "index.html" --delete --cache-control "max-age=31536000,immutable"
+
+      # Invalidate CloudFront
+      # - aws cloudfront create-invalidation --distribution-id E1MJNHUS0SC6E9 --paths "/*"
