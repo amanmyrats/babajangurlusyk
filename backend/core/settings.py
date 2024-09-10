@@ -146,6 +146,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:4200",
     "http://127.0.0.1",
     "https://transfertakip.com",
+    "http://babajangurlusyk.transfertakip.com",
     "http://*",
 ]
 
