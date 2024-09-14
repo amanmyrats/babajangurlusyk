@@ -24,4 +24,4 @@ phases:
       - aws s3 sync ./dist/babajangurlusyk/browser s3://babajangurlusyk.transfertakip.com --exclude "index.html" --delete --cache-control "max-age=31536000,immutable"
 
       # Invalidate CloudFront
-      - aws cloudfront create-invalidation --distribution-id ELJX0FK2OX3EU --paths "/*"
+      - aws cloudfront create-invalidation --distribution-id E3EU81E4KKV56K --paths "/*"
