@@ -22,6 +22,7 @@ from .serializers import (
 ) 
 from .models import Account, Role, AccountRole
 from .filtersets import ( AccountFilterSet, )
+from .utils import check_initial_roles
 
 
 class AccountModelViewSet(ModelViewSet):
@@ -134,6 +135,11 @@ class RoleModelViewSet(ModelViewSet):
     ordering_fields = ['name']
     ordering = ['name']
     permission_classes = [IsAuthenticated, IsOrunbasar, ]
+
+    # override list method
+    def list(self, request):
+        check_initial_roles()
+        return super().list(request)
 
 
 class AccountRoleModelViewSet(ModelViewSet):

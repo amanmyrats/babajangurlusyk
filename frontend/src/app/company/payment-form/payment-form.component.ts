@@ -20,6 +20,7 @@ import { Client } from '../models/client.model';
 import { Supplier } from '../models/supplier.model';
 import { ClientService } from '../services/client.service';
 import { SupplierService } from '../services/supplier.service';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-payment-form',
@@ -31,6 +32,7 @@ import { SupplierService } from '../services/supplier.service';
     ReactiveFormsModule, 
     InputTextModule, InputNumberModule, CalendarModule, 
     ButtonModule, FloatLabelModule, DropdownModule, CommonModule, 
+    InputTextareaModule, 
   ],
   providers: [
     HttpErrorPrinterService, FormErrorPrinterService

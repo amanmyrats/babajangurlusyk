@@ -52,6 +52,7 @@ export class UserFormComponent implements OnInit{
     private formErrorPrinter: FormErrorPrinterService,
   ) { 
     this.userForm = this.fb.group({
+      username: ['', Validators.required],
       first_name: ['', Validators.required],
       last_name: [''],
       role: ['', Validators.required],

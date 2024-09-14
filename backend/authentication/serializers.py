@@ -30,7 +30,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['user_id'] = self.user.id
         data['first_name'] = self.user.first_name
         data['is_superuser'] = self.user.is_superuser
-        if hasattr(self.user, 'account_role') and self.user.account_:
+        if hasattr(self.user, 'account_role') and self.user.account_role:
             data['role'] = self.user.account_role.role.name
         else:
             data['role'] = ''

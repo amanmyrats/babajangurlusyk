@@ -26,7 +26,7 @@ class AccountModelSerializer(ModelSerializer):
     class Meta:
         model = Account
         fields = (
-            'id', 'first_name', 'last_name', 
+            'id', 'username', 'first_name', 'last_name', 
             'is_active', 'is_staff', 'is_superuser', 'date_joined', 
             'role', 'role_name')
         read_only_fields = ('is_active', 'is_staff', 'is_superuser', 'date_joined', 'role_name',)

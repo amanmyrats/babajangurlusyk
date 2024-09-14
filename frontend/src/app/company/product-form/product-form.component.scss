@@ -10,9 +10,30 @@
     width: 100%;
     margin-top: 2rem;
   }
+
+  .horizontal {
+    display: flex;
+    flex-direction: row;
+
+    &-child {
+      margin-right: 1rem;
+    }
+  }
   
   .p-button-success {
     width: 100%;
     margin-top: 10px;
+  }
+
+  // .horizontal-child must be flex-column after 576px
+  @media (max-width: 576px) {
+    .horizontal {
+      display: flex;
+      flex-direction: column;
+
+      &-child {
+        margin-right: 0;
+      }
+    }
   }
   

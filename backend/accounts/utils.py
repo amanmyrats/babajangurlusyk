@@ -13,6 +13,6 @@ def check_initial_roles():
         'isgar',
     ]
     for role in roles:
-        role_exists = Role.objects.filter(role_name=role).exists()
+        role_exists = Role.objects.filter(name=role).exists()
         if not role_exists:
-            Role.objects.create(role_name=role)
+            Role.objects.create(name=role)

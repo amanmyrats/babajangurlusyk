@@ -1,5 +1,12 @@
+from django.http import HttpResponse
+
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
+from rest_framework import status
+from rest_framework.response import Response
+
+from import_export.formats.base_formats import DEFAULT_FORMATS
 
 from .serializers import (
     ClientModelSerializer, CekModelSerializer, PaymentModelSerializer, 
@@ -15,6 +22,7 @@ from .filtersets import (
     ExpenseFilterSet, ProductFilterSet, ClientFilterSet, CekFilterSet, 
     PaymentFilterSet, 
 )
+from .resources import ProductModelResource
 
 
 class ProductModelViewSet(ModelViewSet):
@@ -25,6 +33,74 @@ class ProductModelViewSet(ModelViewSet):
     ordering_fields = ('name', 'category', 'initial_price', 'sale_price', )
     ordering = ('name', 'category', 'initial_price', 'sale_price', )
     permission_classes = [IsAuthenticated, IsOrunbasar, ]
+
+    @action(detail=False, methods=['get'])
+    def export(self, request, *args, **kwargs):
+        # Use the same queryset as for list view, but without pagination
+        queryset = self.filter_queryset(self.get_queryset())
+
+        # Export data using the resource
+        resource = ProductModelResource()
+        dataset = resource.export(queryset=queryset[:1000])
+        
+        export_format = request.query_params.get('format', 'xlsx').lower()
+        print('export_format', export_format)
+        if export_format == 'csv':
+            export_data = dataset.csv
+            content_type = 'text/csv'
+            extension = 'csv'
+            response_data = export_data.encode('utf-8')
+        elif export_format == 'json':
+            export_data = dataset.json
+            content_type = 'application/json'
+            extension = 'json'
+            response_data = export_data.encode('utf-8')
+        else:  # Default to XLSX
+            export_data = dataset.xlsx
+            content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            extension = 'xlsx'
+            response_data = export_data
+        
+        # Use HttpResponse for binary data to avoid any encoding issues
+        response = HttpResponse(response_data, content_type=content_type)
+        response['Content-Disposition'] = f'attachment; filename="harytlar.{extension}"'
+        return response
+    
+    @action(detail=False, methods=['post'])
+    def import_data(self, request, *args, **kwargs):
+        resource = ProductModelResource()
+        file = request.FILES.get('file')
+        
+        if not file:
+            return Response({'error': 'Excel faýl saýlaň!'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        file_format = None
+        for format in DEFAULT_FORMATS:
+            if format().is_binary() and file.name.endswith(format().get_extension()):
+                file_format = format()
+                break
+
+        if file_format is None:
+            return Response({'error': 'Excel xlsx formatynda bolmaly.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        dataset = file_format.create_dataset(file.read())
+        result = resource.import_data(dataset, dry_run=True)  # Dry run to check for errors
+        # print('result', result)
+        # print(dir(result))
+        # print('result.has_errors()', result.has_errors())
+        # print('result.row_errors()', result.row_errors())
+        # print('result.error_rows', result.error_rows)
+        # print('result.base_errors', result.base_errors)
+        for er in result.error_rows:
+            print(er.errors, er.number)
+
+        if result.has_errors():
+            return Response({'errors': result.row_errors()}, status=status.HTTP_400_BAD_REQUEST)
+
+        resource.import_data(dataset, dry_run=False)  # Perform actual import
+        return Response({'status': 'Üstünlikli ýerine ýetirildi.'}, status=status.HTTP_200_OK)
+
+
 
 
 class ClientModelViewSet(ModelViewSet):

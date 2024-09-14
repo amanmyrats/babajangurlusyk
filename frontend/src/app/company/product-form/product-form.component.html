@@ -1,115 +1,120 @@
 <p-panel>
-    <form [formGroup]="productForm" class="generic-form" (ngSubmit)="submitForm()">
-      <div class="p-grid p-fluid">
-        <input id="id" type="text" formControlName="id" hidden>
-        <div class="p-col-12">
+  <form [formGroup]="productForm" class="generic-form" (ngSubmit)="submitForm()">
+    <div class="p-grid p-fluid">
+      <input id="id" type="text" formControlName="id" hidden>
+
+      <div class="p-col-12">
+        <span class="p-float-label">
+          <input id="name" type="text" formControlName="name" pInputText>
+          <label for="name">Ady</label>
+        </span>
+      </div>
+
+      <div class="p-col-12">
+        <span class="p-float-label">
+          <input id="name_2" type="text" formControlName="name_2" pInputText>
+          <label for="name_2">Ady-2</label>
+        </span>
+      </div>
+
+      <div class="p-col-12">
+        <span class="p-float-label">
+          <input id="name_3" type="text" formControlName="name_3" pInputText>
+          <label for="name_3">Ady-3</label>
+        </span>
+      </div>
+
+
+      <div class="p-col-12 horizontal-child">
+        <span class="p-float-label">
+          <p-dropdown class="unit-dropdown" [options]="units" formControlName="unit" optionLabel="code" optionValue="id"
+            appendTo="body" id="unit">
+            <ng-template let-unit pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ unit.code }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label for="unit">Birligi</label>
+        </span>
+      </div>
+
+
+      <div class="horizontal">
+        <div class="p-col-12 horizontal-child">
           <span class="p-float-label">
-            <input id="name" type="text" formControlName="name" pInputText>
-            <label for="name">Ady</label>
+            <p-inputNumber formControlName="initial_price" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="0"
+              [maxFractionDigits]="2" />
+            <label for="number-input">Gelen Bahasy</label>
           </span>
-        </div>
-        <div class="p-col-12">
-          <span class="p-float-label">
-            <input id="name_2" type="text" formControlName="name_2" pInputText>
-            <label for="name_2">Ady-2</label>
-          </span>
-        </div>
-        <div class="p-col-12">
-          <span class="p-float-label">
-            <input id="name_3" type="text" formControlName="name_3" pInputText>
-            <label for="name_3">Ady-3</label>
-          </span>
-        </div>
-        
-        <div class="p-col-12">
-            <p-floatLabel>
-                <p-dropdown class="unit-dropdown" [options]="units" formControlName="unit"
-                    optionLabel="code" optionValue="id" appendTo="body" id="unit">
-                    <ng-template let-unit pTemplate="item">
-                        <div class="flex align-items-center gap-2">
-                            <div>{{ unit.code }}</div>
-                        </div>
-                    </ng-template>
-                </p-dropdown>
-                <label for="unit">Birligi</label>
-            </p-floatLabel>
         </div>
 
-        <div class="p-col-12">
-            <p-floatLabel>
-                <p-inputNumber formControlName="initial_price" inputId="minmaxfraction" 
-                mode="decimal"
-                [minFractionDigits]="0" [maxFractionDigits]="2" />
-                <label for="number-input">Gelen Bahasy</label>
-            </p-floatLabel>
-        </div>
-  
-        <div class="p-col-12">
-            <p-floatLabel>
-                <p-dropdown class="currency-dropdown" [options]="currencies" formControlName="currency"
-                    optionLabel="code" optionValue="id" appendTo="body" id="currency">
-                    <ng-template let-currency pTemplate="item">
-                        <div class="flex align-items-center gap-2">
-                            <div>{{ currency.code }}</div>
-                        </div>
-                    </ng-template>
-                </p-dropdown>
-                <label for="currency">Pul Birligi</label>
-            </p-floatLabel>
-        </div>
-        <div class="p-col-12">
-            <p-floatLabel>
-                <p-inputNumber formControlName="sale_price" inputId="minmaxfraction" 
-                mode="decimal"
-                [minFractionDigits]="0" [maxFractionDigits]="2" />
-                <label for="number-input">Satyş Bahasy</label>
-            </p-floatLabel>
-        </div>
-  
-        <div class="p-col-12">
-            <p-floatLabel>
-                <p-dropdown class="currency-dropdown" [options]="currencies" formControlName="currency"
-                    optionLabel="code" optionValue="id" appendTo="body" id="currency">
-                    <ng-template let-currency pTemplate="item">
-                        <div class="flex align-items-center gap-2">
-                            <div>{{ currency.code }}</div>
-                        </div>
-                    </ng-template>
-                </p-dropdown>
-                <label for="currency">Pul Birligi</label>
-            </p-floatLabel>
-        </div>
-  
-        <div class="p-col-12">
-            <p-floatLabel>
-                <p-dropdown class="category-dropdown" [options]="categories" formControlName="category"
-                    optionLabel="code" optionValue="id" appendTo="body" id="category">
-                    <ng-template let-category pTemplate="item">
-                        <div class="flex align-items-center gap-2">
-                            <div>{{ category.code }}</div>
-                        </div>
-                    </ng-template>
-                </p-dropdown>
-                <label for="category">Kategoriýa</label>
-            </p-floatLabel>
-        </div>
-        <div class="p-col-12">
-          <span class="p-float-label">
-            <textarea 
-              rows="5"
-              cols="30" 
-              pInputTextarea 
-              formControlName="description">
-          </textarea>
-            <label for="description">Goşmaça Düşündiriş</label>
+        <div class="p-col-12 horizontal-child">
+        <span class="p-float-label">
+          <p-dropdown class="currency-dropdown" [options]="currencies" formControlName="initial_price_currency"
+              optionLabel="code" optionValue="id" appendTo="body" id="initial_price_currency">
+              <ng-template let-currency pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  <div>{{ currency.code }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+            <label for="initial_price_currency">Satyş Pul Birligi</label>
           </span>
         </div>
-  
-        <div class="p-col-6">
-          <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
-        </div>
       </div>
-    </form>
-    <p-messages></p-messages>
-  </p-panel>
-  
+
+      <div class="horizontal">
+        <div class="p-col-12 horizontal-child">
+        <span class="p-float-label">
+          <p-inputNumber formControlName="sale_price" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="0"
+            [maxFractionDigits]="2" />
+          <label for="number-input">Satyş Bahasy</label>
+        </span>
+
+      </div>
+
+      <div class="p-col-12 horizontal-child">
+        <span class="p-float-label">
+          <p-dropdown class="currency-dropdown" [options]="currencies" formControlName="sale_price_currency"
+            optionLabel="code" optionValue="id" appendTo="body" id="sale_price_currency">
+            <ng-template let-currency pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ currency.code }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label for="number-input">Satyş Pul Birligi</label>
+        </span>
+      </div>
+    </div>
+
+      <div class="p-col-12">
+        <span class="p-float-label">
+          <p-dropdown class="category-dropdown" [options]="categories" formControlName="category" optionLabel="code"
+            optionValue="id" appendTo="body" id="category">
+            <ng-template let-category pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ category.code }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <label for="category">Kategoriýa</label>
+        </span>
+
+      </div>
+      <div class="p-col-12">
+        <span class="p-float-label">
+          <textarea rows="5" cols="30" pInputTextarea formControlName="description">
+          </textarea>
+          <label for="description">Goşmaça Düşündiriş</label>
+        </span>
+      </div>
+
+      <div class="p-col-6">
+        <button type="submit" pButton label="Ýatda Sakla" class="p-button-success"></button>
+      </div>
+    </div>
+  </form>
+  <p-messages></p-messages>
+</p-panel>

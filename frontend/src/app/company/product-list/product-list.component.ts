@@ -88,8 +88,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
       { field: 'sale_price', header: 'Satyş Bahasy' },
       
-      { field: 'category', header: 'Flight' },
-      { field: 'description', header: 'Pick up' },
+      { field: 'category', header: 'Kategoriýa' },
+      { field: 'description', header: 'Düşündiriş' },
     ];
 
     const fieldNamesToRemove = [
