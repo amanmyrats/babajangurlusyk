@@ -24,33 +24,37 @@ class ProductModelSerializer(ModelSerializer):
 
 
 class ClientModelSerializer(ModelSerializer):
-    olaryn_bergisi = SerializerMethodField()
-    bizin_bergimiz = SerializerMethodField()
+    jemi_satyn_alany = SerializerMethodField()
+    jemi_eden_tolegi = SerializerMethodField()
+    total_ussa_comission = SerializerMethodField()
 
     class Meta:
         model = Client
         fields = '__all__'
 
-    def get_olaryn_bergisi(self, obj):
-        return obj.olaryn_bergisi
+    def get_jemi_satyn_alany(self, obj):
+        return obj.jemi_satyn_alany
     
-    def get_bizin_bergimiz(self, obj):
-        return obj.bizin_bergimiz
+    def get_jemi_eden_tolegi(self, obj):
+        return obj.jemi_eden_tolegi
+    
+    def get_total_ussa_comission(self, obj):
+        return obj.total_ussa_comission
     
 
 class SupplierModelSerializer(ModelSerializer):
-    olaryn_bergisi = SerializerMethodField()
-    bizin_bergimiz = SerializerMethodField()
+    jemi_satyn_alanymyz = SerializerMethodField()
+    jemi_eden_tolegimiz = SerializerMethodField()
 
     class Meta:
         model = Supplier
         fields = '__all__'
 
-    def get_olaryn_bergisi(self, obj):
-        return obj.olaryn_bergisi
+    def get_jemi_satyn_alanymyz(self, obj):
+        return obj.jemi_satyn_alanymyz
     
-    def get_bizin_bergimiz(self, obj):
-        return obj.bizin_bergimiz
+    def get_jemi_eden_tolegimiz(self, obj):
+        return obj.jemi_eden_tolegimiz
     
 
 class CekModelSerializer(ModelSerializer):
@@ -65,6 +69,7 @@ class CekModelSerializer(ModelSerializer):
     
 class PaymentModelSerializer(ModelSerializer):
     client_obj = ClientModelSerializer(source='client', read_only=True)
+    supplier_obj = SupplierModelSerializer(source='supplier', read_only=True)
     
     class Meta:
         model = Payment

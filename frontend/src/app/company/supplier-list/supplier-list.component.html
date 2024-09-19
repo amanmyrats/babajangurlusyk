@@ -29,8 +29,8 @@
             <th pResizableColumn *ngFor="let col of columns">
                 {{col.header}}
             </th>
-            <th>Olaryň bergisi</th>
-            <th>Biziň bergimiz</th>
+            <th>Jemi Satyn Alanymyz</th>
+            <th>Jemi Geçen Tölegimiz</th>
             <th>Tapawudy</th>
             <th></th>
         </tr>
@@ -41,9 +41,9 @@
             <td *ngFor="let col of columns">
                 {{supplier[col.field]}}
             </td>
-            <td>{{supplier.olaryn_bergisi | number:'1.2-2' }}</td>
-            <td>{{supplier.bizin_bergimiz | number:'1.2-2' }}</td>
-            <td>{{(supplier.olaryn_bergisi - supplier.bizin_bergimiz) | number:'1.2-2' }}</td>
+            <td>{{supplier.jemi_satyn_alanymyz | number:'1.2-2' }}</td>
+            <td>{{supplier.jemi_eden_tolegimiz | number:'1.2-2' }}</td>
+            <td>{{(supplier.jemi_eden_tolegimiz - supplier.jemi_satyn_alanymyz) | number:'1.2-2' }}</td>
             
             <td class="action-column">
                 <app-action-buttons 

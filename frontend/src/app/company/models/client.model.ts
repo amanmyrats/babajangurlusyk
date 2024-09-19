@@ -10,8 +10,9 @@ export class Client {
     address?: string;
     email?: string;
     note?: string;
-    olaryn_bergisi?: number;
-    bizin_bergimiz?: number;
+    jemi_satyn_alany?: number;
+    jemi_eden_tolegi?: number;
+    total_ussa_comission?: number;
     created_at?: string;
     updated_at?: string;
 }

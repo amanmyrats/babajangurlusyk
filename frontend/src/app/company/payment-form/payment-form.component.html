@@ -36,9 +36,15 @@
             <div class="p-col-12" *ngIf="paymentForm.get('partner_type')?.value == 'CLIENT'">
                 <span class="p-float-label">
 
-                    <p-dropdown [options]="clients" formControlName="client" optionLabel="name" optionValue="id"
+                    <p-dropdown [options]="clients" formControlName="client" 
+                        optionValue="id"
                         [filter]="true" filterBy="first_name" [showClear]="true" appendTo="body">
                         <ng-template let-client pTemplate="item">
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ client.first_name }} {{ client.last_name }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-client pTemplate="selectedItem">
                             <div class="flex align-items-center gap-2">
                                 <div>{{ client.first_name }} {{ client.last_name }}</div>
                             </div>
@@ -56,6 +62,11 @@
                     <ng-template let-supplier pTemplate="item">
                         <div class="flex align-items-center gap-2">
                             <div>{{ supplier.first_name }} {{ supplier.first_name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-supplier pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2">
+                            <div>{{ supplier.first_name }} {{ supplier.last_name }}</div>
                         </div>
                     </ng-template>
                 </p-dropdown>

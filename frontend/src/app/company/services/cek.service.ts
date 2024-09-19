@@ -37,8 +37,8 @@ export class CekService {
 
   getCekTypes(){
     return [
-      { value: 'IN', label: 'Satyn Alyş Çegi' },
-      { value: 'OUT', label: 'Satyş Çegi' },
+      { value: 'SATYN_ALYS', label: 'Satyn Alyş Çegi' },
+      { value: 'SATYS', label: 'Satyş Çegi' },
     ];
   }
 

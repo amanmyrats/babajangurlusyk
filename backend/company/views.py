@@ -127,8 +127,8 @@ class CekModelViewSet(ModelViewSet):
     serializer_class = CekModelSerializer
     filterset_class = CekFilterSet
     search_fields = ('client__first_name', 'client__last_name', 'note', 'no', 'alan_zatlary',  )
-    ordering_fields = ('no', 'client', 'supplier', 'is_nesye', 'amount', 'alan_zatlary', 'date', )
-    ordering = ('no', 'client', 'supplier', 'is_nesye', 'amount', 'alan_zatlary', 'date', )
+    ordering_fields = ('-updated_at', 'no', 'client', 'supplier', 'is_nesye', 'amount', 'alan_zatlary', 'date', )
+    ordering = ('-updated_at', 'no', 'client', 'supplier', 'is_nesye', 'amount', 'alan_zatlary', 'date', )
     permission_classes = [IsAuthenticated, IsOrunbasar, ]
 
 
@@ -137,8 +137,8 @@ class PaymentModelViewSet(ModelViewSet):
     serializer_class = PaymentModelSerializer
     filterset_class = PaymentFilterSet
     search_fields = ('date', 'client', 'supplier', 'note', )
-    ordering_fields = ('date', 'client', 'supplier', 'amount', )
-    ordering = ('-date', 'client', 'supplier', 'amount', )
+    ordering_fields = ('-updated_at', '-date', 'client', 'supplier', 'amount', )
+    ordering = ('-updated_at', '-date', 'client', 'supplier', 'amount', )
     permission_classes = [IsAuthenticated, IsOrunbasar, ]
 
 

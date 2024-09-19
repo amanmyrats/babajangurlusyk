@@ -72,10 +72,11 @@ export class ClientListComponent implements OnInit {
       { field: 'address', header: 'Adres' },
       { field: 'email', header: 'E-Poçta' },
       { field: 'note', header: 'Bellik' },
+      { field: 'total_ussa_comission', header: 'Ussanyň Jemi Prosendi' },
     ];
     
     const fieldNamesToRemove = [
-      'phone_2', 'phone_3', 'passport_no', 'address', 'email',
+      'phone_2', 'phone_3', 'passport_no', 'address', 'email', 'total_ussa_comission'
     ]; 
     this._selectedColumns = this.cols.filter(col => !fieldNamesToRemove.includes(col.field!));
   }

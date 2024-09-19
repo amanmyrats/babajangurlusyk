@@ -10,19 +10,37 @@ export class FormErrorPrinterService {
     private messageService: MessageService, 
   ) {}
 
-  printFormValidationErrors(driverForm: any) {
+  printFormValidationErrors(form: any) {
     this.messageService.clear(); // Clear existing messages
-    for (const controlName in driverForm.controls) {
-      if (driverForm.controls.hasOwnProperty(controlName)) {
-        const control = driverForm.get(controlName);
+    for (const controlName in form.controls) {
+      if (form.controls.hasOwnProperty(controlName)) {
+        const control = form.get(controlName);
         if (control && control.invalid) {
           const errorMessages = this.getErrorMessages(controlName, control.errors);
           errorMessages.forEach(message => {
-            this.messageService.add({ severity: 'error', summary: 'Doğrulama Hatası', detail: message });
+            this.messageService.add({ severity: 'error', summary: 'Ýalňyşlyk', detail: message });
           });
         }
       }
     }
+
+    // <p *ngIf="cekForm.errors?.['clientOrSupplierRequired']">Either client or supplier is required.</p>
+    // loop form errors and print them
+    if (form.errors) {
+      for (const errorKey in form.errors) {
+        if (form.errors.hasOwnProperty(errorKey)) {
+          switch (errorKey) {
+            case 'clientOrSupplierRequired':
+              this.messageService.add({ severity: 'error', summary: 'Ýalňyşlyk', detail: 'Müşderilerden ýa-da Telekeçilerden biri saýlanmaly.' });
+              break;
+            // Add more cases here for other types of validation errors if needed
+            default:
+              this.messageService.add({ severity: 'error', summary: 'Ýalňyşlyk', detail: 'Dogry däl.' });
+          }
+        }
+      }
+    }
+
   }
 
   getErrorMessages(controlName: string, errors: any): string[] {
@@ -32,23 +50,26 @@ export class FormErrorPrinterService {
         if (errors.hasOwnProperty(errorKey)) {
           switch (errorKey) {
             case 'required':
-              messages.push(`${this.getControlLabel(controlName)} zorunlu.`);
+              messages.push(`${this.getControlLabel(controlName)} hökmany.`);
               break;
             case 'minlength':
-              messages.push(`${this.getControlLabel(controlName)} en az ${errors['minlength'].requiredLength} karakter olmalı.`);
+              messages.push(`${this.getControlLabel(controlName)} iň az ${errors['minlength'].requiredLength} harakter bolmaly.`);
               break;
             case 'maxlength':
-              messages.push(`${this.getControlLabel(controlName)} ${errors['maxlength'].requiredLength} karakterden uzun olamaz.`);
+              messages.push(`${this.getControlLabel(controlName)} ${errors['maxlength'].requiredLength} harakterden uzyn bolup bilmeýär.`);
               break;
             case 'pattern':
-              messages.push(`${this.getControlLabel(controlName)} formatı yanlış.`);
+              messages.push(`${this.getControlLabel(controlName)} formady ýalňyş.`);
               break;
             case 'email':
-              messages.push(`${this.getControlLabel(controlName)} geçerli bir e-posta adresi olması lazım.`);
+              messages.push(`${this.getControlLabel(controlName)} dogry poçta adres bolmaly.`);
+              break;
+            case 'clientOrSupplierValidator':
+              messages.push(`${this.getControlLabel(controlName)} Müşderi ýa-da Telekeçiden biri saýlanmaly.`);
               break;
             // Add more cases here for other types of validation errors if needed
             default:
-              messages.push(`${this.getControlLabel(controlName)} geçerli değil.`);
+              messages.push(`${this.getControlLabel(controlName)} dogry däl.`);
             
             // Add more cases here for other types of validation errors (e.g., minlength, maxlength, pattern)
           }
@@ -92,6 +113,16 @@ export class FormErrorPrinterService {
       password: 'Şifre',
       payment_type: 'Ödeme Türü',
       partner_type: 'Partner Türü',
+      client: 'Müşteri',
+      supplier: 'Tedarikçi',
+      is_nesye: 'Nesye',
+      alan_zatlary: 'Alan Zatlary',
+      referenced_by: 'Referans',
+      reference_percentage: 'Referans Yüzdesi',
+      date: 'Tarih',
+      cek_type: 'Çek Türü',
+      no: 'No',
+
     };
     return labels[controlName] || controlName;
   }

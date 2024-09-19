@@ -31,7 +31,7 @@
             <th>Satyn Alyş/Satyş</th>
             <th>Nesýemi?</th>
             <th>Möçber</th>
-            <th>Alynan Harytlar</th>
+            <th>Senesi</th>
             <th pResizableColumn *ngFor="let col of columns">
                 {{col.header}}
             </th>
@@ -39,26 +39,45 @@
             <th></th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-client let-columns="columns">
+    <ng-template pTemplate="body" let-cek let-columns="columns">
         <tr>
-            <td>{{client.first_name}} {{client.last_name}}</td>
-            <td *ngFor="let col of columns">
-                <span *ngIf="col.field === 'is_ussa' else normalbilgiler">
-                    <div *ngIf="client.is_ussa">
-                    USSA
-                    </div>
-                </span>
-                <ng-template #normalbilgiler>
-                {{client[col.field]}}
-                </ng-template>
+            <td>{{cek.no}}</td>
+            <td>
+                <div *ngIf="cek.partner_type == 'CLIENT'">
+                    {{cek.client_obj?.first_name}} {{cek.client_obj?.last_name}}
+                </div>
             </td>
-            <td>{{client.olaryn_bergisi | number:'1.2-2' }}</td>
-            <td>{{client.bizin_bergimiz | number:'1.2-2' }}</td>
-            <td>{{(client.olaryn_bergisi - client.bizin_bergimiz) | number:'1.2-2' }}</td>
+            <td>
+                <div *ngIf="cek.partner_type == 'SUPPLIER'">
+                    {{cek.supplier_obj?.first_name}} {{cek.supplier_obj?.last_name}}
+                </div>
+            </td>
+            <td>
+                <div *ngIf="cek.cek_type == 'SATYS'">
+                    SATYŞ
+                </div>
+                <div *ngIf="cek.cek_type == 'SATYN_ALYS'">
+                    SATYN ALYŞ
+                </div>
+            </td>
+            <td>
+                <div *ngIf="cek.is_nesye == true">
+                    NESÝE
+                </div>
+                <div *ngIf="cek.is_nesye == false">
+                    NAGT
+                </div>
+            </td>
+            <td>{{cek.amount}}</td>
+            <td>{{cek.date}}</td>
+            
+            <td *ngFor="let col of columns">
+                {{cek[col.field]}}
+            </td>
             
             <td class="action-column">
                 <app-action-buttons 
-                    [obj]="client" 
+                    [obj]="cek" 
                     [wantEdit]="true"
                     [wantDelete]="true"
                     (updateEmitter)="updateObj($event)" 

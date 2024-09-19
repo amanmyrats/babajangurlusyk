@@ -8,8 +8,8 @@ export class Supplier {
     address?: string;
     email?: string;
     note?: string;
-    olaryn_bergisi?: number;
-    bizin_bergimiz?: number;
+    jemi_satyn_alanymyz?: number;
+    jemi_eden_tolegimiz?: number;
     created_at?: string;
     updated_at?: string;
 }

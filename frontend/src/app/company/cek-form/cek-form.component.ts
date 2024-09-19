@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
@@ -20,6 +20,24 @@ import { ClientService } from '../services/client.service';
 import { SupplierService } from '../services/supplier.service';
 import { Cek } from '../models/cek.model';
 import { CekService } from '../services/cek.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
+
+  // Custom validator
+  function clientOrSupplierValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const formGroup = control as FormGroup;
+      const client = formGroup.get('client')?.value;
+      const supplier = formGroup.get('supplier')?.value;
+  
+      if (!client && !supplier) {
+        return { clientOrSupplierRequired: true };
+      }
+  
+      return null;
+    };
+  }
 
 @Component({
   selector: 'app-cek-form',
@@ -31,6 +49,7 @@ import { CekService } from '../services/cek.service';
     ReactiveFormsModule, 
     InputTextModule, InputNumberModule, CalendarModule, 
     ButtonModule, FloatLabelModule, DropdownModule, CommonModule, 
+    SelectButtonModule, InputTextareaModule, 
   ],
   providers: [
     HttpErrorPrinterService, FormErrorPrinterService
@@ -40,6 +59,10 @@ import { CekService } from '../services/cek.service';
 })
 export class CekFormComponent implements OnInit{
 
+  isNesyeOptions: any[] = [
+    { label: 'Nesýe', value: true },
+    { label: 'Nagt', value: false }
+  ];
   cekForm: FormGroup;
   cek: Cek | null = null;
   clients: Client[] = [];
@@ -60,18 +83,21 @@ export class CekFormComponent implements OnInit{
   ) { 
     this.cekForm = this.fb.group({
       id: [''],
+      cek_type: [],
       no: [''],
       partner_type: ['', Validators.required],
       client: [''],
       supplier: [''],
-      cek_type: ['', Validators.required],
       is_nesye: [''],
       amount: [null, Validators.required],
       alan_zatlary: [''],
       referenced_by: [''],
+      reference_percentage: [5],
       note: [''],
       date: [ new Date().toISOString().split('T')[0], Validators.required],
-    });
+    }, {
+      validators: [clientOrSupplierValidator()]
+  });
   }
 
   ngOnInit(): void {
@@ -87,6 +113,12 @@ export class CekFormComponent implements OnInit{
   }
 
   submitForm() {
+    if (this.cekForm.value.partner_type === 'CLIENT') {
+      this.cekForm.patchValue({ supplier: '' });
+    }
+    if (this.cekForm.value.partner_type === 'SUPPLIER') {
+      this.cekForm.patchValue({ client: '' });
+    }
     if (this.cekForm.valid) {
       if (this.cek) {
         console.log('Updating cek:', this.cekForm.value);
@@ -104,6 +136,13 @@ export class CekFormComponent implements OnInit{
       }
       else {
         // Create a new cek
+        // Set cek_type to 'SATYS' if partner_type is 'CLIENT'
+        if (this.cekForm.value.partner_type === 'CLIENT') {
+          this.cekForm.patchValue({ cek_type: 'SATYS' });
+        }
+        if (this.cekForm.value.partner_type === 'SUPPLIER') {
+          this.cekForm.patchValue({ cek_type: 'SATYN_ALYS' });
+        }
         console.log('Creating cek:', this.cekForm.value);
         this.cekService.createCek(this.cekForm.value).subscribe({
           next: (cek: Cek) => {
@@ -117,6 +156,7 @@ export class CekFormComponent implements OnInit{
       }
     } else {
       this.formErrorPrinter.printFormValidationErrors(this.cekForm);
+      console.log(this.cekForm.errors);
     }
   }
 
@@ -160,4 +200,6 @@ export class CekFormComponent implements OnInit{
   getPartnerTypes(): void {
     this.partnerTypes = this.cekService.getPartnerTypes();
   }
+
+
 }

@@ -174,6 +174,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ),
+    'EXCEPTION_HANDLER': 'core.exceptions.custom_exception_handler',
     'DEFAULT_PAGINATION_CLASS': 'common.pagination.CustomPageNumberPagination',
     'PAGE_SIZE': 50,
 }

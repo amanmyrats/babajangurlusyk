@@ -13,6 +13,7 @@ import { PaymentListComponent } from './payment-list/payment-list.component';
 import { ClientListComponent } from './client-list/client-list.component';
 import { SupplierListComponent } from './supplier-list/supplier-list.component';
 import { CurrencyListComponent } from './currency-list/currency-list.component';
+import { CekListComponent } from './cek-list/cek-list.component';
 
 const routes: Routes = [
   { path: '', component: ReportComponent },
@@ -20,6 +21,12 @@ const routes: Routes = [
     path: 'products', canActivate: [RoleGuard], component: ProductListComponent,
     data: {
       roles: ['isgar']
+    }
+  },
+  {
+    path: 'ceks', canActivate: [RoleGuard], component: CekListComponent,
+    data: {
+      roles: ['orunbasar']
     }
   },
   {

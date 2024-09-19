@@ -15,6 +15,7 @@ export class Cek {
     alan_zatlary?: string;
     referenced_by?: string;
     referenced_by_obj?: Client;
+    reference_percentage?: number;
     note?: string;
     date?: string;
     created_at?: string;

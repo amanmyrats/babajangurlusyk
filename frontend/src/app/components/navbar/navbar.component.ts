@@ -91,6 +91,11 @@ export class NavbarComponent implements OnInit {
                 routerLink: '/company/products',
             },
             {
+                label: 'Çekler',
+                icon: 'pi pi-address-book',
+                routerLink: '/company/ceks',
+            },
+            {
                 label: 'Tölegler',
                 icon: 'pi pi-address-book',
                 routerLink: '/company/payments',
@@ -105,6 +110,11 @@ export class NavbarComponent implements OnInit {
                 icon: 'pi pi-address-book',
                 routerLink: '/company/clients',
                 routerLinkActive: 'active-menu-item'
+            },
+            {
+                label: 'Telekeçiler',
+                icon: 'pi pi-address-book',
+                routerLink: '/company/suppliers',
             },
             {
                 label: 'Başlyk Menu',
@@ -146,6 +156,11 @@ export class NavbarComponent implements OnInit {
                 routerLink: '/company/products',
             },
             {
+                label: 'Çekler',
+                icon: 'pi pi-address-book',
+                routerLink: '/company/ceks',
+            },
+            {
                 label: 'Tölegler',
                 icon: 'pi pi-address-book',
                 routerLink: '/company/payments',
@@ -159,7 +174,11 @@ export class NavbarComponent implements OnInit {
                 label: 'Müşderiler',
                 icon: 'pi pi-address-book',
                 routerLink: '/company/clients',
-                routerLinkActive: 'active-menu-item'
+            },
+            {
+                label: 'Telekeçiler',
+                icon: 'pi pi-address-book',
+                routerLink: '/company/suppliers',
             },
         ];
     }

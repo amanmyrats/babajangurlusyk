@@ -1,45 +1,45 @@
 .generic-form {
+  width: 100%;
+}
+
+.p-panel {
+  margin-bottom: 20px;
+}
+
+.horizontal-row {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+
+  &-child {
     width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
   }
-  
-  .p-panel {
-    margin-bottom: 20px;
-  }
-  
-  .horizontal-row {
-    margin-top: 30px;
-  
-    &-child {
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-  }
-  
-  .currency-dropdown {
-    width: 120px;
-  
-    label {
-      font-size: 13px;
-    }
-  }
-  
-  
-  .p-float-label {
-    width: 100%;
-    margin-top: 2rem;
-  }
-  
-  :host {
-    ::ng-deep .p-selectbutton {
-      width: 220px;
-      height: 45px;
-      display: flex;
-      flex-direction: row;
-      font-size: 10px;
-      padding: 0;
-    }
-  }
-  
-  .amount-currency {
+}
+
+:host {
+  ::ng-deep .p-selectbutton {
+    width: 220px;
+    height: 45px;
     display: flex;
+    flex-direction: row;
+    font-size: 10px;
+    padding: 0;
   }
+}
+
+// Add media query for .horizontal-row
+@media screen and (max-width: 668px) {
+  .horizontal-row {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0;
+
+    &-child {
+      margin-top: 30px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

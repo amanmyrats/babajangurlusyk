@@ -66,11 +66,13 @@ export class CekListComponent implements OnInit {
     
     this.cols = [
       { field: 'referenced_by', header: 'Kim getirdi?' },
+      { field: 'reference_percentage', header: 'Ussa %' },
+      { field: 'alan_zatlary', header: 'Alynan Harytlar' },
       { field: 'note', header: 'Bellik' },
     ];
     
     const fieldNamesToRemove = [
-      'referenced_by', 'note', 
+      'referenced_by', 'reference_percentage', 'note', 
     ]; 
     this._selectedColumns = this.cols.filter(col => !fieldNamesToRemove.includes(col.field!));
   }
@@ -146,9 +148,9 @@ export class CekListComponent implements OnInit {
     this.ref.onClose.subscribe((cek: Cek) => {
       if (cek) {
         if (objToEdit) {
-          this.messageService.add({severity:'success', summary: 'Üstünlikli', detail: 'Müşderi üytgedildi'});
+          this.messageService.add({severity:'success', summary: 'Üstünlikli', detail: 'Çek üytgedildi'});
         } else {
-          this.messageService.add({severity:'success', summary: 'Üstünlikli', detail: 'Müşderi goşuldy'});
+          this.messageService.add({severity:'success', summary: 'Üstünlikli', detail: 'Çek goşuldy'});
         }
         this.filterSearch.search();
       }
