@@ -136,6 +136,11 @@ export class NavbarComponent implements OnInit {
                         routerLink: '/company/currencies'
                     },
                     {
+                        label: 'Ölçeg Birlikleri',
+                        icon: 'pi pi-pencil',
+                        routerLink: '/company/units'
+                    },
+                    {
                         separator: true
                     },
                 ]

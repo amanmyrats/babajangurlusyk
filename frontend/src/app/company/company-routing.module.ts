@@ -14,6 +14,7 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { SupplierListComponent } from './supplier-list/supplier-list.component';
 import { CurrencyListComponent } from './currency-list/currency-list.component';
 import { CekListComponent } from './cek-list/cek-list.component';
+import { UnitListComponent } from './unit-list/unit-list.component';
 
 const routes: Routes = [
   { path: '', component: ReportComponent },
@@ -55,6 +56,12 @@ const routes: Routes = [
   },
   {
     path: 'currencies', canActivate: [RoleGuard], component: CurrencyListComponent,
+    data: {
+      roles: ['orunbasar']
+    }
+  },
+  {
+    path: 'units', canActivate: [RoleGuard], component: UnitListComponent,
     data: {
       roles: ['orunbasar']
     }

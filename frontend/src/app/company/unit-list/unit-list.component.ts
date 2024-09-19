@@ -11,11 +11,11 @@ import { SharedToolbarComponent } from '../../components/shared-toolbar/shared-t
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { SharedPaginatorComponent } from '../../components/shared-paginator/shared-paginator.component';
 import { HttpErrorPrinterService } from '../../services/http-error-printer.service';
-import { Currency } from '../models/currency.model';
-import { CurrencyService } from '../services/currency.service';
 import { environment as env } from '../../../environments/environment';
 import { PaginatedResponse } from '../../models/paginated-response.model';
 import { UnitFormComponent } from '../unit-form/unit-form.component';
+import { Unit } from '../models/unit.model';
+import { UnitService } from '../services/unit.service';
 
 @Component({
   selector: 'app-unit-list',
@@ -47,11 +47,11 @@ export class UnitListComponent implements OnInit {
   totalRecords: number = 0;
 
   loading: boolean = false;
-  currencies: Currency[] = [];
+  units: Unit[] = [];
   ref: DynamicDialogRef | undefined;
 
   constructor(
-    private currencyService: CurrencyService,
+    private unitService: UnitService,
     public dialogService: DialogService,
     public messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -62,24 +62,24 @@ export class UnitListComponent implements OnInit {
     this.rows = env.pagination.defaultPageSize;
   }
 
-  getCurrencies(queryString: string = '') {
+  getUnits(queryString: string = '') {
     this.loading = true;
-    this.currencyService.getCurrencies(queryString).subscribe({
-      next: (paginatedResponse: PaginatedResponse<Currency>) => {
-        console.log('Fetched Currencies successfully: ', paginatedResponse.results);
-        this.currencies = paginatedResponse.results!;
+    this.unitService.getUnits(queryString).subscribe({
+      next: (paginatedResponse: PaginatedResponse<Unit>) => {
+        console.log('Fetched Units successfully: ', paginatedResponse.results);
+        this.units = paginatedResponse.results!;
         this.totalRecords = paginatedResponse.count!;
         this.loading = false;
       },
       error: (error: any) => {
-        console.error('Error fetching Currencies: ', error)
+        console.error('Error fetching Units: ', error)
         this.loading = false;
       }
     });
   }
 
-  updateObj(currency: Currency) {
-    this.showForm(currency);
+  updateObj(unit: Unit) {
+    this.showForm(unit);
   }
 
   createObj() {
@@ -100,7 +100,7 @@ export class UnitListComponent implements OnInit {
       dismissableMask: true,
 
       accept: () => {
-        this.currencyService.deleteCurrency(id).subscribe({
+        this.unitService.deleteUnit(id).subscribe({
           next: (res: any) => {
             this.messageService.add(
               { severity: 'success', summary: 'Üstünlikli', detail: 'Üstünlikli pozuldy!' });
@@ -115,20 +115,20 @@ export class UnitListComponent implements OnInit {
 
   }
 
-  showForm(objToEdit: Currency | null = null) {
+  showForm(objToEdit: Unit | null = null) {
     this.ref = this.dialogService.open(UnitFormComponent, {
-      header: 'Birlik goş/üýtget',
+      header: 'Ölçeg Birligi goş/üýtget',
       styleClass: 'fit-content-dialog',
       contentStyle: { "overflow": "auto" },
       data: {
-        currency: objToEdit
+        unit: objToEdit
       }, 
       draggable: true,
       resizable: true,
     });
 
-    this.ref.onClose.subscribe((currency: Currency) => {
-      if (currency) {
+    this.ref.onClose.subscribe((unit: Unit) => {
+      if (unit) {
         if (objToEdit) {
           this.messageService.add(
             { severity: 'success', summary: 'Üstünlikli', detail: 'Birlik üytgedildi' });
@@ -142,7 +142,7 @@ export class UnitListComponent implements OnInit {
   }
 
   search(queryString: string = ''): void {
-    this.getCurrencies(queryString);
+    this.getUnits(queryString);
   }
 
   onPageChange(event: any): void {

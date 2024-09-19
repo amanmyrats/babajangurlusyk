@@ -73,18 +73,21 @@ class ProductModelViewSet(ModelViewSet):
         
         if not file:
             return Response({'error': 'Excel faýl saýlaň!'}, status=status.HTTP_400_BAD_REQUEST)
-        
+        print('file')
+        print(file)
         file_format = None
         for format in DEFAULT_FORMATS:
             if format().is_binary() and file.name.endswith(format().get_extension()):
                 file_format = format()
                 break
-
+        print('file_format', file_format)
         if file_format is None:
             return Response({'error': 'Excel xlsx formatynda bolmaly.'}, status=status.HTTP_400_BAD_REQUEST)
 
         dataset = file_format.create_dataset(file.read())
+        print('dataset', dataset)
         result = resource.import_data(dataset, dry_run=True)  # Dry run to check for errors
+        print('result', result)
         # print('result', result)
         # print(dir(result))
         # print('result.has_errors()', result.has_errors())
