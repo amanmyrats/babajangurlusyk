@@ -165,6 +165,8 @@ CORS_ALLOW_HEADERS = [
     'Authorization',  # Add any additional headers required by your Angular app
 ]
 
+AUTHENTICATION_BACKENDS = ['authentication.custom_authenticate.CaseInsensitiveModelBackend']
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
