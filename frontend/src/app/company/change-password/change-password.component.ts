@@ -22,7 +22,7 @@ import { Message, MessageService } from 'primeng/api';
     PasswordModule, 
     ButtonModule, 
     CommonModule, 
-    MessagesModule
+    MessagesModule, PasswordModule, 
   ],
   providers: [MessageService],
   templateUrl: './change-password.component.html',
