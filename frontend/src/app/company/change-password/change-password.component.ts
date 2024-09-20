@@ -60,7 +60,7 @@ export class ChangePasswordComponent  implements OnInit {
           // create query params to pass to the login page in turkish
           const queryParams = {
             'lang': 'tr', 
-            'msg': 'Şifreniz başarıyla değiştirildi. Lütfen tekrar giriş yapın.'
+            'msg': 'Parolyňyz üstünlikli üýtgedildi. Içeri girip bilersiňiz.'
           };
           this.onGotoLogin(queryParams);
 

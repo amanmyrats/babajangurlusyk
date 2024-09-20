@@ -73,10 +73,10 @@ export class LoginComponent implements OnInit {
             // Redirect to company page
             console.log('Redirect to company page');
             this.router.navigate(['/company']);
-            this.loading = false;
           } else {
             // Show error message
             console.log('Login failed');
+            this.messageService.add({ severity: 'error', summary: 'Login failed', detail: 'Login Failed' });
             this.loading = false;
           }
         },
@@ -107,9 +107,11 @@ export class LoginComponent implements OnInit {
   }
 
   getQueryParams() {
-    this.queryParams = this.router.parseUrl(this.router.url).queryParams;
+      this.queryParams = this.router.parseUrl(this.router.url).queryParams;
+    console.log('Query Params:', this.queryParams);
     if (this.queryParams.msg) {
       this.messages = [{ severity: 'success', detail: this.queryParams.msg }];
-    }
+    }    
+
   }
 }
