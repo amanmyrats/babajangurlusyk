@@ -9,7 +9,11 @@
         </div>
         <div class="p-field">
           <label for="password">Parol</label>
-          <input id="password" type="password" pInputText formControlName="password" />
+          <p-password id="password" 
+          [toggleMask]="true" 
+          formControlName="password" 
+          [feedback]="false"
+          />
         </div>
         <button 
           [loading]="loading" 

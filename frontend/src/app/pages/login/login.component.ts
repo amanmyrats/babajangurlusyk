@@ -10,6 +10,7 @@ import { Message, MessageService } from 'primeng/api';
 import { FormErrorPrinterService } from '../../services/form-error-printer.service';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule, MessagesModule, CommonModule,
+    PasswordModule, 
   ],
   providers: [
     HttpErrorPrinterService, FormErrorPrinterService,
